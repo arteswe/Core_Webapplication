@@ -9,11 +9,11 @@ namespace BloodpressureApp.Models
         [Required(ErrorMessage = "Ange ett id")]
         public int PersonId { get; set; }
 
-        //upper pressure
+        //upper 
         [Required(ErrorMessage = "Ange systolisk värde")]
         public int Systolic { get; set; }
         
-        //lower pressure
+        //lower
         [Required(ErrorMessage = "Ange diastolisk värde")]
         public int Diastolic { get; set; }
 
