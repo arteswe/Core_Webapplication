@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Blutdruck";
+}
+
+<br /><br />
+<h2>@ViewData["Title"]</h2>
+
+<script type="text/javascript">
+    window.onload = function () {
+        var data = $.ajax({
+            method: 'GET',
+            dataType: 'json',
+            url: 'http://localhost:8182/api/bloodpressure',
+            success: function (res) {
+
+                var i;
+                var systolicArray = [];
+                for (i = 0; i < res.length; i++) {
+                    systolicArray.push({ label: res[i].Date.slice(0, 10), y: res[i].Systolic });
+                }
+                var diastolicArray = [];
+                for (i = 0; i < res.length; i++) {
+                    diastolicArray.push({ label: res[i].Date.slice(0, 10), y: res[i].Diastolic });
+                }
+
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    title: {
+                        text: "Andrea Manth", fontColor: "#bbb", fontSize: 30, fontWeight: "normal", fontFamily: "Verdana"
+                    },
+                    
+                    axisY: {
+                        interval: 30,
+                        gridColor: "lightgray",
+                        stripLines: [
+                            {
+                                value: 135,
+                                color: "#5272A5",
+                                thickness: 2
+                            },
+                            {
+                                value: 85,
+                                color: "#A5525C",
+                                thickness: 2
+                            }
+                        ]
+                    },
+                    data: [
+                        {
+                            type: "line",
+                            name: "Systolic",
+                            showInLegend: true,
+                            markerType: "cross",
+                            legendText: "Systolic",
+                            dataPoints: systolicArray
+                        },
+                        {
+                            type: "line",
+                            name: "Diastolic",
+                            showInLegend: true,
+                            markerType: "cross",
+                            legendText: "Diastolic",
+                            dataPoints: diastolicArray
+                        }
+                    ]
+                });
+                chart.render();
+            },
+            error: function (res) {
+                console.log("There was an error: " + JSON.stringify(res));
+                $(".fail").html("There was an error" + JSON.stringify(res));
+            }
+        });
+    }
+
+</script>
+<div class="fail"></div>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+
+<br />
+    <button class="btn btn-default floatright">
+        <a asp-area="" asp-controller="Admin" asp-action="Create">Neuer Eintrag</a>
+    </button>
+    <button class="btn btn-default floatright">
+        <a asp-area="" asp-controller="Admin" asp-action="Index">Alle Einträge</a>
+    </button>
+<br />
+<br />

@@ -1,0 +1,42 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost:8182",
+      "sslPort": 0
+    },
+    "iisExpress": {
+      "applicationUrl": "http://localhost:58330/",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "Key": "Value",
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "connectionStrings:bloodpressureDbConnection": "Data Source=AM;Initial Catalog=BloodpressureDB;Integrated Security=True;"
+      }
+    },
+    "BlodpressureApp": {
+      "commandName": "IIS",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:58331/"
+    },
+    "BloodpressureAPI": {
+      "commandName": "IIS",
+      "workingDirectory": "C:\\inetpub\\wwwroot\\BloodpressureAPI",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:8182/api/bloodpressure",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "DEVELOPMENT"
+      }
+    }
+  }
+}
